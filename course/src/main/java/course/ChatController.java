@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @RestController
@@ -20,8 +23,11 @@ public class ChatController {
 
     private final Resource javaClassResource = new ClassPathResource("/templates/java-classes.ftl");
 
-    public ChatController(ChatClient.Builder builder) {
+    private final SpringTemplateEngine engine;
+
+    public ChatController(ChatClient.Builder builder, SpringTemplateEngine engine) {
         this.chatClient = builder.build();
+        this.engine = engine;
     }
 
     @PostMapping("/ask")
@@ -54,6 +60,22 @@ public class ChatController {
                         spec.text(javaClassResource)
                                 .params(Map.of("className", question.className(), "javaVersion", question.javaVersion(),
                                         "user", "John Doe"))
+                )
+                .call()
+                .content();
+    }
+
+    @PostMapping("/java-keywords")
+    public String keywords(@RequestBody List<String> question) {
+        // Thymeleaf
+        return chatClient
+                .prompt()
+                .templateRenderer((template, variables) ->
+                        engine.process(template, new Context(Locale.of("hu"),
+                                Map.of("keywords", question))))
+                .user(spec ->
+                        spec.text("java-keywords")
+                                .params(Map.of("keywords", question))
                 )
                 .call()
                 .content();

@@ -1,0 +1,5 @@
+ Kérlek írj a következő Java kulcsszavakról egy-egy mondatot!
+
+[# th:each="keyword : ${keywords}"]
+  - [(${keyword})]
+[/]

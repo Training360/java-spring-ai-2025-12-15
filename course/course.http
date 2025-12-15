@@ -33,3 +33,11 @@ Content-Type: application/json
   "className": "Map",
   "javaVersion": "21"
 }
+
+### Thymeleaf template
+POST http://localhost:8080/api/java-keywords
+Content-Type: application/json
+
+[
+    "private", "public"
+]
