@@ -1,7 +1,9 @@
 package course;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
@@ -16,6 +18,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -27,9 +30,12 @@ public class ChatController {
 
     private final SpringTemplateEngine engine;
 
-    public ChatController(ChatClient.Builder builder, SpringTemplateEngine engine) {
+    private final ChatMemory chatMemory;
+
+    public ChatController(ChatClient.Builder builder, SpringTemplateEngine engine, ChatMemory chatMemory) {
         this.chatClient = builder.build();
         this.engine = engine;
+        this.chatMemory = chatMemory;
     }
 
     @PostMapping("/ask")
@@ -82,5 +88,24 @@ public class ChatController {
                 )
                 .call()
                 .content();
+    }
+
+    @PostMapping("memory")
+    public MemoryAnswer memory(@RequestBody MemoryQuestion question) {
+        final UUID id;
+        if (question.id() == null) {
+            id = UUID.randomUUID();
+        } else {
+            id = question.id();
+        }
+
+        String answer = chatClient
+                .prompt()
+                .user(question.question())
+                .advisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, id))
+                .call()
+                .content();
+        return new MemoryAnswer(id, answer);
     }
 }

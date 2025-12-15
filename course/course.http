@@ -41,3 +41,20 @@ Content-Type: application/json
 [
     "private", "public"
 ]
+
+### Chat memory - első kérdés
+POST http://localhost:8080/api/memory
+Content-Type: application/json
+
+{
+   "question": "Véletlenszerűen válassz ki egy LLM AI modellt, és írd le csak a nevét!"
+}
+
+### Chat memory - második kérdés
+POST http://localhost:8080/api/memory
+Content-Type: application/json
+
+{
+  "id": "1241b9ba-6c6b-4d6d-a119-674f94be6893",
+  "question": "A választott modellnek írd le egy mondatban a fő jellemzőit!"
+}
