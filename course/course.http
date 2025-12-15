@@ -24,3 +24,12 @@ Tudsz internetről adatokat betölteni?
 
 ### Java verziók
 POST http://localhost:8080/api/java-versions
+
+### Template
+POST http://localhost:8080/api/java-classes
+Content-Type: application/json
+
+{
+  "className": "Map",
+  "javaVersion": "21"
+}

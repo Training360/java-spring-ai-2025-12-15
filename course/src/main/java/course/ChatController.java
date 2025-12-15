@@ -2,6 +2,8 @@ package course;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import java.util.Map;
 public class ChatController {
 
     private final ChatClient chatClient;
+
+    private final Resource javaClassResource = new ClassPathResource("/templates/java-classes.ftl");
 
     public ChatController(ChatClient.Builder builder) {
         this.chatClient = builder.build();
@@ -41,4 +45,17 @@ public class ChatController {
                 .entity(new ParameterizedTypeReference<>() {});
     }
 
+    @PostMapping("/java-classes")
+    public String javaClasses(@RequestBody JavaClassQuestion question) {
+        // https://www.stringtemplate.org/
+        return chatClient
+                .prompt()
+                .user(spec ->
+                        spec.text(javaClassResource)
+                                .params(Map.of("className", question.className(), "javaVersion", question.javaVersion(),
+                                        "user", "John Doe"))
+                )
+                .call()
+                .content();
+    }
 }
