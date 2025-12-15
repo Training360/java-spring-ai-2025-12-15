@@ -1,0 +1,13 @@
+### Direktben megszólítjuk a OpenAI-t
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+
+{
+  "model": "gpt-5-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Mi az a Java! Válaszolj egy mondatban!"
+    }
+  ]
+}
