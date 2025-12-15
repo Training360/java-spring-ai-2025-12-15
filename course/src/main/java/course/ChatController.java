@@ -20,6 +20,9 @@ public class ChatController {
     public String ask(@RequestBody String question) {
         return chatClient
                 .prompt()
+                .system("""
+                        Te egy Java oktató vagy, próbálj röviden, egy-két mondatban válaszolni.
+                        """)
                 .user(question)
                 .call()
                 .content();

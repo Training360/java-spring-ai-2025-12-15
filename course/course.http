@@ -15,4 +15,4 @@ Content-Type: application/json
 ### Kérdés a saját alkalmazáshoz
 POST http://localhost:8080/api/ask
 
-Mi az a Java! Válaszolj egy mondatban!
+Mi az a Java?
