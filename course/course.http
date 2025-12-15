@@ -16,3 +16,11 @@ Content-Type: application/json
 POST http://localhost:8080/api/ask
 
 Mi az a Java?
+
+### Kérdés a saját alkalmazáshoz
+POST http://localhost:8080/api/ask
+
+Tudsz internetről adatokat betölteni?
+
+### Java verziók
+POST http://localhost:8080/api/java-versions
