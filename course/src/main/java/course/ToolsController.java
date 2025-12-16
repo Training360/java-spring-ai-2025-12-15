@@ -17,14 +17,16 @@ public class ToolsController {
 
     private final ActualDateTimeTool actualDateTimeTool;
 
-    private final EnrollCourseTool enrollCourseTool;
+//    private final EnrollCourseTool enrollCourseTool;
 
     private final ToolCallbackProvider toolCallbackProvider;
 
-    public ToolsController(ChatClient.Builder builder, ActualDateTimeTool actualDateTimeTool, EnrollCourseTool enrollCourseTool, ToolCallbackProvider toolCallbackProvider) {
+    public ToolsController(ChatClient.Builder builder, ActualDateTimeTool actualDateTimeTool,
+//                           EnrollCourseTool enrollCourseTool,
+                           ToolCallbackProvider toolCallbackProvider) {
         this.chatClient = builder.build();
         this.actualDateTimeTool = actualDateTimeTool;
-        this.enrollCourseTool = enrollCourseTool;
+//        this.enrollCourseTool = enrollCourseTool;
         this.toolCallbackProvider = toolCallbackProvider;
     }
 

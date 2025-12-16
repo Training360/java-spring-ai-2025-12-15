@@ -24,8 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -129,11 +127,9 @@ public class ChatController {
     public String images(@RequestParam String question, @RequestParam MultipartFile image) {
         return chatClient
                 .prompt()
-                .user(spec -> {
-                    spec
-                            .text(question)
-                            .media(MimeTypeUtils.IMAGE_PNG, new InputStreamResource(image));
-                })
+                .user(spec -> spec
+                        .text(question)
+                        .media(MimeTypeUtils.IMAGE_PNG, new InputStreamResource(image)))
                 .call()
                 .content();
     }
