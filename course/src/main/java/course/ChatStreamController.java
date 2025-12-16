@@ -23,7 +23,7 @@ public class ChatStreamController {
         this.question = question;
     }
 
-    @GetMapping
+    @GetMapping(produces = "text/event-stream")
     public Flux<ResponseChunk> ask() {
         return chatClient
                 .prompt()

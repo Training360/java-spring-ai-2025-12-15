@@ -77,3 +77,12 @@ Content-Disposition: form-data; name="image"; filename="roadmap.png"
 < ./roadmap.png
 
 --WebAppBoundary--
+
+### Stream
+POST http://localhost:8080/api/stream
+
+Mi az a Java?
+
+### SSE
+GET http://localhost:8080/api/stream
+#Accept: text/event-stream
