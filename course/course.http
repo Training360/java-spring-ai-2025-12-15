@@ -166,3 +166,14 @@ Szeretnék jelentkezni a JAVA-BGN tanfolyamra.
 POST http://localhost:8080/api/tools
 
 Szeretnék jelentkezni a JAVA-BGN kóddal rendelkező tanfolyamra, 2025 április 12-re.
+
+### Transcript
+POST http://localhost:8080/api/transcription
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="audio"; filename="netalive-01.mp3"
+Content-Type: audio/mpeg
+
+< ./netalive-01.mp3
+--WebAppBoundary--
