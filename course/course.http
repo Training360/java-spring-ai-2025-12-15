@@ -151,3 +151,18 @@ Hogyan kell kiejteni a "ubiquitous language" szót angolul?
 POST http://localhost:8080/api/ask-courses
 
 Melyik képzésen van Lombok?
+
+### Aktuális idő, toolal
+POST http://localhost:8080/api/tools
+
+Mennyi az idő most Budapesten?
+
+### Jelentkezés toolal
+POST http://localhost:8080/api/tools
+
+Szeretnék jelentkezni a JAVA-BGN tanfolyamra.
+
+### Jelentkezés toolal
+POST http://localhost:8080/api/tools
+
+Szeretnék jelentkezni a JAVA-BGN kóddal rendelkező tanfolyamra, 2025 április 12-re.
