@@ -1,9 +1,12 @@
 package course;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.metadata.Usage;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
@@ -22,6 +25,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class ChatController {
 
     private final ChatClient chatClient;
@@ -40,7 +44,7 @@ public class ChatController {
 
     @PostMapping("/ask")
     public String ask(@RequestBody String question) {
-        return chatClient
+        ChatResponse response = chatClient
                 .prompt()
                 .advisors(new SimpleLoggerAdvisor())
                 .system("""
@@ -48,7 +52,11 @@ public class ChatController {
                         """)
                 .user(question)
                 .call()
-                .content();
+                .chatResponse();
+
+        Usage usage = response.getMetadata().getUsage();
+        log.info("Usage: {}", usage);
+        return response.getResult().getOutput().getText();
     }
 
     @PostMapping("/java-versions")
