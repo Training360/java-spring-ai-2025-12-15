@@ -58,3 +58,22 @@ Content-Type: application/json
   "id": "1241b9ba-6c6b-4d6d-a119-674f94be6893",
   "question": "A választott modellnek írd le egy mondatban a fő jellemzőit!"
 }
+
+### Multimodalis kérdés
+POST http://localhost:8080/api/images
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="question"
+
+A megadott kép egy Spring Boot tanulási útvonalat tartalmaz.
+Alaposan elemezd a képet, és sorold fel azokat a részeket,
+amelyek a Testing témakörhöz kapcsolódnak! Csak az ábrán
+szereplő szavak közül válogass!
+
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="roadmap.png"
+
+< ./roadmap.png
+
+--WebAppBoundary--

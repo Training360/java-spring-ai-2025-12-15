@@ -10,11 +10,11 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
@@ -115,5 +115,18 @@ public class ChatController {
                 .call()
                 .content();
         return new MemoryAnswer(id, answer);
+    }
+
+    @PostMapping("/images")
+    public String images(@RequestParam String question, @RequestParam MultipartFile image) {
+        return chatClient
+                .prompt()
+                .user(spec -> {
+                    spec
+                            .text(question)
+                            .media(MimeTypeUtils.IMAGE_PNG, new InputStreamResource(image));
+                })
+                .call()
+                .content();
     }
 }
