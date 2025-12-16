@@ -131,3 +131,8 @@ Elég
 POST http://localhost:8080/api/moderation
 
 Kill 'Em All
+
+### Image
+POST http://localhost:8080/api/generate-image
+
+Rajzolj egy diófát!
