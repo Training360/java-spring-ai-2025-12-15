@@ -136,3 +136,13 @@ Kill 'Em All
 POST http://localhost:8080/api/generate-image
 
 Rajzolj egy diófát!
+
+### Audio
+POST http://localhost:8080/api/audio
+
+ubiquitous language
+
+### Pronounce
+POST http://localhost:8080/api/pronounce
+
+Hogyan kell kiejteni a "ubiquitous language" szót angolul?
