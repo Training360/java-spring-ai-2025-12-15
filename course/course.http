@@ -86,3 +86,48 @@ Mi az a Java?
 ### SSE
 GET http://localhost:8080/api/stream
 #Accept: text/event-stream
+
+### Moderation
+POST http://localhost:8080/api/moderation
+
+Az Úr mindent lát
+És majd ítél rút bűnökért
+Vad gyűlölség
+Mérget küld rád a másik család
+Elég Elég
+Fertőz a Montague-fekély
+A gyűlölet betegség férges szenvedély
+Elég Elég
+Folyton a szemetekben ég
+A gyűlölet, hordozzuk átkos bélyegét
+Ebből elég
+Átkot szór ránk száz dög kígyó, vérlázító
+A név Capulet egyet jelent: a vak gyűlölet
+Elég Elég
+Ki minket mocskol, vesszen el
+A gyűlölet csak gyűlöletet érdemel
+Apák, fiúk egymásnak így adják tovább
+A gyűlölet fertőz több nemzedéken át
+Légy átkozott, egész fajod
+Süket füleknek prédikálj
+Szolgáld a Sátánt, ki mélybe ránt
+Örömre, szépre ne találj
+Nézd meg magad
+A rabja vagy
+Vasdrótján rángat gyűlöleted
+Vélt igazságod csak habzó átok
+S nevében követsz el bűnöket
+A végítélet napja majd
+A tűzbe küld, pokolra hajt
+A gyűlölet oly végtelen
+uralkodik a lelkeken
+Elég Elég
+Elég Elég
+Elég Elég
+Elég Elég
+Elég
+
+### Moderation
+POST http://localhost:8080/api/moderation
+
+Kill 'Em All
