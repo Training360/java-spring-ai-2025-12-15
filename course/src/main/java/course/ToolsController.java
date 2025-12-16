@@ -2,6 +2,7 @@ package course;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +19,13 @@ public class ToolsController {
 
     private final EnrollCourseTool enrollCourseTool;
 
-    public ToolsController(ChatClient.Builder builder, ActualDateTimeTool actualDateTimeTool, EnrollCourseTool enrollCourseTool) {
+    private final ToolCallbackProvider toolCallbackProvider;
+
+    public ToolsController(ChatClient.Builder builder, ActualDateTimeTool actualDateTimeTool, EnrollCourseTool enrollCourseTool, ToolCallbackProvider toolCallbackProvider) {
         this.chatClient = builder.build();
         this.actualDateTimeTool = actualDateTimeTool;
         this.enrollCourseTool = enrollCourseTool;
+        this.toolCallbackProvider = toolCallbackProvider;
     }
 
     @PostMapping
@@ -33,7 +37,9 @@ public class ToolsController {
                         Amennyiben az egyik hiányzik, kérdezz rá!
                         """)
                 .user(question)
-                .tools(actualDateTimeTool, enrollCourseTool)
+//                .tools(actualDateTimeTool, enrollCourseTool)
+                .tools(actualDateTimeTool)
+                .toolCallbacks(toolCallbackProvider)
                 .call()
                 .content();
     }
