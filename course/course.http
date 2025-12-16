@@ -150,4 +150,4 @@ Hogyan kell kiejteni a "ubiquitous language" szót angolul?
 ### RAG
 POST http://localhost:8080/api/ask-courses
 
-Milyen Domain Driven Design képzést tudsz ajánlani?
+Melyik képzésen van Lombok?
